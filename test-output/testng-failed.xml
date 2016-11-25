@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="by.epam.gmailAutomation.test.ShouldCheckMessageInSpamFolder">
+      <class name="by.epam.gmailAutomation.test.ShouldCheckLetterFromUser1">
         <methods>
-          <include name="signIn"/>
-          <include name="beforeClass"/>
           <include name="afterClass"/>
+          <include name="popImapSettings"/>
+          <include name="beforeClass"/>
         </methods>
-      </class> <!-- by.epam.gmailAutomation.test.ShouldCheckMessageInSpamFolder -->
+      </class> <!-- by.epam.gmailAutomation.test.ShouldCheckLetterFromUser1 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

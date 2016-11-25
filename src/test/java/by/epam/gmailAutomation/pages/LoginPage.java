@@ -3,6 +3,8 @@ package by.epam.gmailAutomation.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class LoginPage extends AbstractPage {
 
 	public LoginPage(WebDriver driver) {
@@ -33,6 +35,7 @@ public class LoginPage extends AbstractPage {
 	}
 	
 	public LoginPage goToLoginPage(){
+		//driver.manage().window().maximize();
 		driver.get("https://gmail.com");
 		return this;
 	}

@@ -51,6 +51,20 @@ public class HomePage extends AbstractPage {
 	@FindBy(xpath = "//div[@class='aim'][4]/div")
 	private WebElement spamButton;	
 	
+	//для второго теста
+	
+	@FindBy(xpath = "//div[@class='T-I J-J5-Ji ash T-I-ax7 L3']/div[1]")
+	private WebElement settingsButton;
+	
+	@FindBy(xpath = "//div[@class='J-N aMS']")
+	private WebElement settingsButtonInPopUpWindow;
+	
+	@FindBy(xpath = "//div[@class='y6']")
+	private WebElement messageButton;
+	
+	@FindBy(xpath = "//div[@class='a1 aaA aMZ']") //кнопка скрепочки
+	private WebElement attachmentButton;
+	
 	public HomePage goToSendMsgForm() {
 		wait.waitForElementIsClickable(writeMsgButton);
 		writeMsgButton.click();
@@ -90,6 +104,15 @@ public class HomePage extends AbstractPage {
 	
 	public HomePage clickSendButton() {
 		sendButton.click();
+		return this;
+	}
+	
+	public HomePage sendMsgWithAttach(String destination) {
+		goToSendMsgForm();
+		switchToNewWindow();
+		fillDestinationField(destination);
+		
+		
 		return this;
 	}
 	
@@ -138,5 +161,20 @@ public class HomePage extends AbstractPage {
 		wait.waitForElementIsClickable(spamButton);
 		spamButton.click();
 		return new SpamPage(driver);
+	}
+	
+	public GeneralSettingsPage goToSettingsPage() {
+		wait.waitForElementIsClickable(settingsButton);
+		settingsButton.click();
+		switchToNewWindow();
+		wait.waitForElementIsClickable(settingsButtonInPopUpWindow);
+		settingsButtonInPopUpWindow.click();
+		return new GeneralSettingsPage(driver);
+	}
+	
+	public ConfirmMessagePage goToConfirmMsg() {
+		wait.waitForElementIsClickable(messageButton);
+		messageButton.click();
+		return new ConfirmMessagePage(driver);
 	}
 }
