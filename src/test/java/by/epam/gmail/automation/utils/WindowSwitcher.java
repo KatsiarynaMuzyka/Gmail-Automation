@@ -1,4 +1,4 @@
-package by.epam.gmailAutomation.utils;
+package by.epam.gmail.automation.utils;
 
 import org.openqa.selenium.WebDriver;
 

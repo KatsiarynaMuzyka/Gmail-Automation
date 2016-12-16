@@ -1,16 +1,10 @@
-package by.epam.gmailAutomation.pages;
-
-import java.util.Set;
+package by.epam.gmail.automation.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ForwardPopImapSettingsPage extends AbstractPage {
-
-	public ForwardPopImapSettingsPage(WebDriver driver) {
-		super(driver);
-	}
 
 	@FindBy(xpath = "//input[@act ='add']")
 	private WebElement addForwardAddressButton;
@@ -21,43 +15,50 @@ public class ForwardPopImapSettingsPage extends AbstractPage {
 	@FindBy(xpath = "//button[@class='J-at1-auR']")
 	private WebElement nextButton;
 	
-	@FindBy(xpath = "//td[@align = 'left']/input[3]")
+	@FindBy(xpath = "//input[@value = 'Proceed']")
 	private WebElement continueButton;
 	
 	@FindBy(xpath = "//button[@class='J-at1-auR']")
 	private WebElement okButton;
 	
-	@FindBy(xpath = "//div[@class = 'aim'][1]/div/div/div[1]")
-	private WebElement inboxMsgButton;
+	@FindBy(xpath = "//a[contains(text(), 'Inbox')]")
+	private WebElement inboxMessageButton;
 	
 	@FindBy(xpath = "//input[@name = 'sx_em'][@value = '1']")
 	private WebElement radioButton;
 	
-	@FindBy(xpath = "//td[@class='r9']/div/div[3]/span")
+	@FindBy(xpath = "//span[text() = 'creating a filter!']")
 	private WebElement filterSettingsButton;
 	
 	@FindBy(xpath = "//input[@class='ZH nr aQa']")
 	private WebElement fromWhomField;
 	
-	@FindBy(xpath = "//span[@class='w-Pv ZG'][1]/input")
+	@FindBy(xpath = "//label[text() = 'Has attachment']")
 	private WebElement hasAttachmentRadioButton;
 	
-	@FindBy(xpath = "//div[@class='w-Nw'][8]/div[2]") //создать фильтр в соответствии с этим запросом
+	@FindBy(xpath = "//div[text() = 'Create filter with this search »']")
 	private WebElement createFilterButton;
 	
 	@FindBy(xpath = "//button[@class = 'J-at1-auR J-at1-atl']")
 	private WebElement transitionConfirmationButton;
 	
-	@FindBy(xpath = "//div[@class='nH lZ'][6]/input")
+	@FindBy(xpath = "//label[text() = 'Delete it']")
 	private WebElement deleteRadioButton;
 	
-	@FindBy(xpath = "//div[@class='nH lZ'][8]/input")
+	@FindBy(xpath = "//label[text() = 'Always mark it as important']")
 	private WebElement markAsImportantRadioButton;
 	
-	@FindBy(xpath = "//div[@class='ZZ']/div[5]/div")
+	@FindBy(xpath = "//div[text() = 'Create filter']")
 	private WebElement doneButton;
 	
-	public ForwardPopImapSettingsPage switchToNewWindow(){		
+	@FindBy(xpath = "//button[contains(text(), 'Save Changes')]")
+	private WebElement saveChangesButton;
+	
+	public ForwardPopImapSettingsPage(WebDriver driver) {
+		super(driver);
+	}
+	
+	private ForwardPopImapSettingsPage switchToNewWindow(){		
 		driver.switchTo().activeElement();		
 		return this;
 	}
@@ -77,10 +78,11 @@ public class ForwardPopImapSettingsPage extends AbstractPage {
 		driver.switchTo().window(temp);
 		wait.waitForElementIsClickable(okButton);
 		okButton.click();
+		switchToNewWindow();
 		return this;
 	}
 	
-	public ForwardPopImapSettingsPage filterSettings(String fromWhom) {
+	public HomePage filterSettings(String fromWhom) {
 		wait.waitForElementIsClickable(radioButton);
 		radioButton.click();
 		wait.waitForElementIsClickable(filterSettingsButton);
@@ -102,12 +104,16 @@ public class ForwardPopImapSettingsPage extends AbstractPage {
 		deleteRadioButton.click();
 		markAsImportantRadioButton.click();
 		doneButton.click();
-		return this;
+		wait.waitForElementIsClickable(radioButton);
+		radioButton.click();
+		wait.waitForElementIsClickable(saveChangesButton);
+		saveChangesButton.click();
+		return new HomePage(driver);
 	}
 	
 	public HomePage goToHomePage() {
-		wait.waitForElementIsClickable(inboxMsgButton);
-		inboxMsgButton.click();
+		wait.waitForElementIsClickable(inboxMessageButton);
+		inboxMessageButton.click();
 		return new HomePage(driver);
 	}
 }

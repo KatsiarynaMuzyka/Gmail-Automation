@@ -1,4 +1,4 @@
-package by.epam.gmailAutomation.data;
+package by.epam.gmail.automation.data;
 
 public class UserData {
 	private static String user1Name = "automationEpamUser1@gmail.com";
@@ -10,7 +10,6 @@ public class UserData {
 	private static String user3Name = "automationEpamUser3@gmail.com";
 	private static String user3Password = "user312345678";
 	
-	private static String subject = "Spam";
 	private static String message = "hellodjkfhjkfh";
 	
 	private static String nameForCheck = "Anatoly Anatolyev";
@@ -61,14 +60,6 @@ public class UserData {
 
 	public static void setUser3Password(String user3Password) {
 		UserData.user3Password = user3Password;
-	}
-
-	public static String getSubject() {
-		return subject;
-	}
-
-	public static void setSubject(String subject) {
-		UserData.subject = subject;
 	}
 
 	public static String getMessage() {
