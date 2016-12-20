@@ -11,4 +11,9 @@ public class ShouldCheckWarningMessageBecauseOfImproperExtension extends BaseTes
 				.goToThemesPage().selectPhotosFromComputer("EPAM Toolkit").checkWarningMessage());
 
 	}
+	
+	@AfterClass
+	public void afterClass() {
+		driver.close();
+	}
 }
