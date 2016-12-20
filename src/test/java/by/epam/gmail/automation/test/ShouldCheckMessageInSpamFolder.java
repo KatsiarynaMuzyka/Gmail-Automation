@@ -21,7 +21,7 @@ public class ShouldCheckMessageInSpamFolder extends BaseTest {
 
 	@AfterClass
 	public void afterClass() {
-		driver.close();
+		//driver.close();
 	}
 
 }

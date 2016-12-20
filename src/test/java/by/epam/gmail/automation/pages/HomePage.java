@@ -65,6 +65,9 @@ public class HomePage extends AbstractPage {
 	@FindBy(xpath = "//a[contains(text(), 'Trash')]")
 	private WebElement trashButton;
 	
+	@FindBy(xpath = "//div[contains(text(), 'Attachments larger than 25MB')]")
+	private WebElement warningText;
+	
 	public HomePage(WebDriver driver) {
 		super(driver);
 	}
@@ -105,30 +108,13 @@ public class HomePage extends AbstractPage {
 		return this;
 	}
 
-	public HomePage sendMessageWithAttach(String destination) {
-		goToSendMessageForm();
-		switchToNewWindow();
-		fillDestinationField(destination);
-		wait.waitForElementIsClickable(attachmentButton);
-		attachmentButton.click();
-		String file = "ForAttach.txt";
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		for (char c : file.toUpperCase().toCharArray()) {
-
-			if (c != '.') {
-				robot.keyPress(c);
-				robot.keyRelease(c);
-			} else {
-				robot.keyPress(KeyEvent.VK_PERIOD);
-			}
-		}
-
-		robot.keyPress(KeyEvent.VK_ENTER);
+	public HomePage sendMessageWithAttach(String destination, String fileName) { 
+		goToSendMessageForm(); 
+		switchToNewWindow(); 
+		fillDestinationField(destination); 
+		wait.waitForElementIsClickable(attachmentButton); 
+		attachmentButton.click(); 
+		javaRobot(fileName);
 		sendButton.click();
 		driver.switchTo().alert().accept();
 		return this;
@@ -190,6 +176,15 @@ public class HomePage extends AbstractPage {
 		return new GeneralSettingsPage(driver);
 	}
 
+	/*public ThemesPage goToThemesPage() {
+		wait.waitForElementIsClickable(settingsButton);
+		settingsButton.click();
+		switchToNewWindow();
+		wait.waitForElementIsClickable(themesButtonInPopUpWindow);
+		themesButtonInPopUpWindow.click();
+		return new ThemesPage(driver);
+	}
+	*/
 	public MessagePage goToMessagePage() {
 		wait.waitForElementIsClickable(messageButton);
 		messageButton.click();
@@ -202,5 +197,13 @@ public class HomePage extends AbstractPage {
 		wait.waitForElementIsClickable(trashButton);
 		trashButton.click();
 		return new TrashPage(driver);
+	}
+	
+	public boolean checkWarningMessageThatSizeOfFileIsOver25MB() {
+		wait.waitForElementIsVisible(warningText);
+		if (warningText.isDisplayed()) {
+			return true;
+		}
+		return false;
 	}
 }

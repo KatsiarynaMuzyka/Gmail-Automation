@@ -2,6 +2,8 @@ package by.epam.gmail.automation.pages;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -29,5 +31,26 @@ public abstract class AbstractPage {
 		wait = new ExplicitWait(driver);
 		switcher = new WindowSwitcher(driver);
 		log = LogManager.getRootLogger();
+	}
+	
+	public void javaRobot(String fileName) {
+		String file = fileName; 
+		try { 
+		Thread.sleep(5000); 
+		} catch (InterruptedException e) { 
+		e.printStackTrace(); 
+		} 
+
+		for (char c : file.toUpperCase().toCharArray()) { 
+
+		if (c != '.') { 
+		robot.keyPress(c); 
+		robot.keyRelease(c); 
+		} else { 
+		robot.keyPress(KeyEvent.VK_PERIOD); 
+		} 
+		} 
+
+		robot.keyPress(KeyEvent.VK_ENTER);
 	}
 }

@@ -21,7 +21,7 @@ public class ShouldCheckLetterFromUser1 extends BaseTest{
 				.authorization("automationEpamUser2@gmail.com", "user212345678").goToSettingsPage()
 				.goToPopImapSettingsPage().filterSettings("automationEpamUser1@gmail.com").logOut()
 				.switchUser().authorization("automationEpamUser1@gmail.com", "user112345678")
-				.sendMessageWithAttach("automationEpamUser2@gmail.com")
+				.sendMessageWithAttach("automationEpamUser2@gmail.com", "ForAttach.txt")
 				.sendMessage("automationEpamUser2@gmail.com", "message without attach").logOut().switchUser()
 				.authorization("automationEpamUser2@gmail.com", "user212345678").goToTrashPage().goToMessagePage();
 
@@ -37,6 +37,6 @@ public class ShouldCheckLetterFromUser1 extends BaseTest{
 
 	@AfterClass
 	public void afterClass() {
-		driver.close();
+		//driver.close();
 	}
 }
