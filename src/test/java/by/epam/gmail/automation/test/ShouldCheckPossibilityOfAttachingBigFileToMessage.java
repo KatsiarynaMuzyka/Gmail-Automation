@@ -15,6 +15,6 @@ public class ShouldCheckPossibilityOfAttachingBigFileToMessage extends BaseTest 
 
 	@AfterClass
 	public void afterClass() {
-		// driver.close();
+		driver.close();
 	}
 }
