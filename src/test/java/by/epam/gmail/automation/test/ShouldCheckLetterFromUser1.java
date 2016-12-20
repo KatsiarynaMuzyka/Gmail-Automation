@@ -37,6 +37,6 @@ public class ShouldCheckLetterFromUser1 extends BaseTest{
 
 	@AfterClass
 	public void afterClass() {
-		//driver.close();
+		driver.close();
 	}
 }
