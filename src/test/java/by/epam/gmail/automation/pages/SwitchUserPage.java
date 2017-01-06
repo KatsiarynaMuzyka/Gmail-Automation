@@ -17,12 +17,14 @@ public class SwitchUserPage extends AbstractPage {
 	}
 
 	public LoginPage switchUser() {
+		log.info("Switching to another user");
 		wait.waitForElementIsClickable(addUserButton);
 		addUserButton.click();
 		return new LoginPage(driver);
 	}
 
 	public LoginPage addAndSwitchUser() {
+		log.info("Adding new user and switching to another user");
 		wait.waitForElementIsClickable(swichUserButton);
 		swichUserButton.click();
 		wait.waitForElementIsClickable(addUserButton);

@@ -17,12 +17,14 @@ public class GeneralSettingsPage extends AbstractPage {
 	}
 	
 	public ForwardPopImapSettingsPage goToPopImapSettingsPage() {
+		log.info("Opening POP/IMAP settings page");
 		wait.waitForElementIsClickable(popImapSettingsButton);
 		popImapSettingsButton.click();
 		return new ForwardPopImapSettingsPage(driver);
 	}
 	
 	public ThemesPage goToThemesPage() {
+		log.info("Opening themes page");
 		wait.waitForElementIsClickable(themesButton);
 		themesButton.click();
 		return new ThemesPage(driver);

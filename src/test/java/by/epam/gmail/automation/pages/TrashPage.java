@@ -14,6 +14,7 @@ public class TrashPage extends AbstractPage {
 	}
 
 	public MessagePage goToMessagePage() {
+		log.info("Opening message page");
 		wait.waitForElementIsClickable(attachIcon);
 		attachIcon.click();
 		return new MessagePage(driver);

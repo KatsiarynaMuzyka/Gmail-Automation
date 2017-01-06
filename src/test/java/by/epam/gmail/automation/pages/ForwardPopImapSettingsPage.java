@@ -64,6 +64,7 @@ public class ForwardPopImapSettingsPage extends AbstractPage {
 	}
 	
 	public ForwardPopImapSettingsPage addAddressForForwarding(String user3Address) {
+		log.info("Adding address for forwarding");
 		wait.waitForElementIsClickable(addForwardAddressButton);
 		addForwardAddressButton.click();
 		switchToNewWindow();
@@ -83,6 +84,7 @@ public class ForwardPopImapSettingsPage extends AbstractPage {
 	}
 	
 	public HomePage filterSettings(String fromWhom) {
+		log.info("Configuring forwarding filters");
 		wait.waitForElementIsClickable(radioButton);
 		radioButton.click();
 		wait.waitForElementIsClickable(filterSettingsButton);
@@ -112,6 +114,7 @@ public class ForwardPopImapSettingsPage extends AbstractPage {
 	}
 	
 	public HomePage goToHomePage() {
+		log.info("Opening home page");
 		wait.waitForElementIsClickable(inboxMessageButton);
 		inboxMessageButton.click();
 		return new HomePage(driver);

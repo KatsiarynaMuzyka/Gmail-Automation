@@ -38,12 +38,14 @@ public class MessagePage extends AbstractPage {
 	}
 
 	public ConfirmationPage goToConfirmation() {
+		log.info("Opening confirmation page");
 		wait.waitForElementIsClickable(confirmationLink);
 		confirmationLink.click();
 		return new ConfirmationPage(driver);
 	}
 
 	public HomePage goToHomePage() {
+		log.info("Opening home page");
 		wait.waitForElementIsClickable(inboxMessageButton);
 		inboxMessageButton.click();
 		return new HomePage(driver);
@@ -53,9 +55,7 @@ public class MessagePage extends AbstractPage {
 		wait.waitForElementIsClickable(showDetailsButton);
 		if ((name.equals(senderName.getText())) && (attachmentName.equals(attachment.getText()))) {
 			showDetailsButton.click();
-			if (importanseText.isDisplayed()) {
-				return true;
-			}
+			return (importanseText.isDisplayed());
 		}
 		showDetailsButton.click();
 		return false;
@@ -65,19 +65,13 @@ public class MessagePage extends AbstractPage {
 		wait.waitForElementIsClickable(showDetailsButton);
 		if ((name.equals(senderName.getText()) && checkAattachment.size() == 0)) {
 			showDetailsButton.click();
-			if (checkImportanseText.size() == 0) {
-				return true;
-			}
+			return (checkImportanseText.size() == 0); 
 		}
-
 		return false;
 	}
 	
 	public boolean checkTheLetterWithoutAttachIsInInbox(String name) {
 		wait.waitForElementIsClickable(showDetailsButton);
-		if ((name.equals(senderName.getText()) && checkAattachment.size() == 0)) {
-			return true;
-		}
-		return false;
+		return ((name.equals(senderName.getText()) && checkAattachment.size() == 0));
 	}
 }

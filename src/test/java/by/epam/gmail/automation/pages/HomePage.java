@@ -1,10 +1,10 @@
 package by.epam.gmail.automation.pages;
 
-import java.awt.event.KeyEvent;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import by.epam.gmail.automation.utils.JavaRobot;
 
 public class HomePage extends AbstractPage {
 
@@ -79,6 +79,7 @@ public class HomePage extends AbstractPage {
 	}
 
 	public HomePage switchToDefaultWindow() {
+		log.info("Switching to default window");
 		driver.switchTo().defaultContent();
 		return this;
 	}
@@ -108,19 +109,21 @@ public class HomePage extends AbstractPage {
 		return this;
 	}
 
-	public HomePage sendMessageWithAttach(String destination, String fileName) { 
+	public HomePage sendMessageWithAttach(String destination, String fileName) {
+		log.info("Sending message with attach");
 		goToSendMessageForm(); 
 		switchToNewWindow(); 
 		fillDestinationField(destination); 
 		wait.waitForElementIsClickable(attachmentButton); 
 		attachmentButton.click(); 
-		javaRobot(fileName);
+		JavaRobot.enterCommandOrFileName(fileName);
 		sendButton.click();
 		driver.switchTo().alert().accept();
 		return this;
 	}
 
 	public HomePage sendMessage(String destination, String message) {
+		log.info("Sending message");
 		goToSendMessageForm();
 		switchToNewWindow();
 		fillDestinationField(destination);
@@ -130,18 +133,21 @@ public class HomePage extends AbstractPage {
 	}
 
 	private HomePage clickUserIcon() {
+		log.info("Clicking user icon");
 		wait.waitForElementIsClickable(userIcon);
 		userIcon.click();
 		return this;
 	}
 
 	private SwitchUserPage clickLogOutButton() {
+		log.info("Clicking log out button");
 		wait.waitForElementIsClickable(logOutButton);
 		logOutButton.click();
 		return new SwitchUserPage(driver);
 	}
 
 	public SwitchUserPage logOut() {
+		log.info("Log out");
 		wait.waitForElementIsClickable(userIcon);
 		clickUserIcon();
 		wait.waitForElementIsClickable(logOutButton);
@@ -150,6 +156,7 @@ public class HomePage extends AbstractPage {
 	}
 
 	public HomePage markMessageAsSpam() {
+		log.info("Marking message as spam");
 		wait.waitForElementIsClickable(checkBox);
 		checkBox.click();
 		wait.waitForElementIsClickable(folderListButton);
@@ -160,6 +167,7 @@ public class HomePage extends AbstractPage {
 	}
 
 	public SpamPage goToSpamPage() {
+		log.info("Opening spam page");
 		wait.waitForElementIsClickable(moreButton);
 		moreButton.click();
 		wait.waitForElementIsClickable(spamButton);
@@ -168,6 +176,7 @@ public class HomePage extends AbstractPage {
 	}
 
 	public GeneralSettingsPage goToSettingsPage() {
+		log.info("Opening settings page");
 		wait.waitForElementIsClickable(settingsButton);
 		settingsButton.click();
 		switchToNewWindow();
@@ -176,22 +185,24 @@ public class HomePage extends AbstractPage {
 		return new GeneralSettingsPage(driver);
 	}
 
-	/*public ThemesPage goToThemesPage() {
-		wait.waitForElementIsClickable(settingsButton);
-		settingsButton.click();
-		switchToNewWindow();
-		wait.waitForElementIsClickable(themesButtonInPopUpWindow);
-		themesButtonInPopUpWindow.click();
-		return new ThemesPage(driver);
-	}
-	*/
+//	public ThemesPage goToThemesPage() {
+//		wait.waitForElementIsClickable(settingsButton);
+//		settingsButton.click();
+//		switchToNewWindow();
+//		wait.waitForElementIsClickable(themesButtonInPopUpWindow);
+//		themesButtonInPopUpWindow.click();
+//		return new ThemesPage(driver);
+//	}
+	
 	public MessagePage goToMessagePage() {
+		log.info("Opening message page");
 		wait.waitForElementIsClickable(messageButton);
 		messageButton.click();
 		return new MessagePage(driver);
 	}
 
 	public TrashPage goToTrashPage() {
+		log.info("Opening trash page");
 		wait.waitForElementIsClickable(moreButton);
 		moreButton.click();
 		wait.waitForElementIsClickable(trashButton);
@@ -201,9 +212,6 @@ public class HomePage extends AbstractPage {
 	
 	public boolean checkWarningMessageThatSizeOfFileIsOver25MB() {
 		wait.waitForElementIsVisible(warningText);
-		if (warningText.isDisplayed()) {
-			return true;
-		}
-		return false;
+		return (warningText.isDisplayed());
 	}
 }

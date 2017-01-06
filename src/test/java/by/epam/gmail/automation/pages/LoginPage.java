@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import by.epam.gmail.automation.property.PropertyProvider;
+
 public class LoginPage extends AbstractPage {
 
 	@FindBy(id = "Email")
@@ -39,13 +41,15 @@ public class LoginPage extends AbstractPage {
 	}
 	
 	public HomePage authorization(String email, String password) {
+		log.info("Authorization");
 		fillEmailField(email);
 		fillPasswordField(password);
 		return new HomePage(driver);
 	}
 	
 	public LoginPage goToLoginPage(){
-		driver.get("https://gmail.com");
+		log.info("Opening login page");
+		driver.get(PropertyProvider.getProperty("url"));
 		return this;
 	}
 }

@@ -3,8 +3,6 @@ package by.epam.gmail.automation.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ConfirmationPage extends AbstractPage {
 	
@@ -21,11 +19,12 @@ public class ConfirmationPage extends AbstractPage {
 	}
 		
 	public MessagePage confirmation() {
+		log.info("Forwarding confirmation");
 		thisWindow = driver.getWindowHandle();
 		switcher.winSwitcher();
 		wait.waitForElementIsClickable(submitButton);
 		submitButton.click();
-		checkText = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(checkText));
+		wait.waitForElementIsVisible(checkText);
 		driver.close();
 		driver.switchTo().window(thisWindow);
 		return new MessagePage(driver);

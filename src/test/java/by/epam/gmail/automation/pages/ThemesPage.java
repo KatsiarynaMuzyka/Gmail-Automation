@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import by.epam.gmail.automation.utils.JavaRobot;
+
 public class ThemesPage extends AbstractPage {
 
 	@FindBy(xpath = "//a[@class = 'e NvzLyc']")
@@ -29,6 +31,7 @@ public class ThemesPage extends AbstractPage {
 	}
 
 	public ThemesPage selectPhotosFromComputer(String fileName) {
+		log.info("Selecting photos from computer");
 		wait.waitForElementIsClickable(setThemeButton);
 		setThemeButton.click();
 		wait.waitForElementIsClickable(myPhotosButton);
@@ -39,15 +42,12 @@ public class ThemesPage extends AbstractPage {
 		uploadAPhotoButton.click();
 		wait.waitForElementIsClickable(selectAPhotoFromComputerButton);
 		selectAPhotoFromComputerButton.click();
-		javaRobot(fileName);
+		JavaRobot.enterCommandOrFileName(fileName);
 		return this;
 	}
 
 	public boolean checkWarningMessage() {
 		wait.waitForElementIsVisible(warningMessage);
-		if (warningMessage.isDisplayed()) {
-			return true;
-		}
-		return false;
+		return (warningMessage.isDisplayed());
 	}
 }

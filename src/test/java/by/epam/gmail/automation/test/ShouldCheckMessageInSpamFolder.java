@@ -1,27 +1,47 @@
 package by.epam.gmail.automation.test;
 
+import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import by.epam.gmail.automation.data.UserData;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
+import by.epam.gmail.automation.data.User;
+import by.epam.gmail.automation.property.PropertyProvider;
 
 public class ShouldCheckMessageInSpamFolder extends BaseTest {
+	
+	@BeforeTest
+	private void setUp() {
+		user1 = new User();
+		user1.setLogin(PropertyProvider.getProperty("user1"));
+		user1.setPassword(PropertyProvider.getProperty("password1"));
+		
+		user2 = new User();
+		user2.setLogin(PropertyProvider.getProperty("user2"));
+		user2.setPassword(PropertyProvider.getProperty("password2"));
+	}
 
 	@Test
 	public void checkMessageFromUser1InSpamFolder() {
-		Assert.assertTrue(loginPage.goToLoginPage().authorization("automationEpamUser1@gmail.com", "user112345678")
-				.sendMessage("automationEpamUser2@gmail.com", UserData.getMessage()).switchToDefaultWindow().logOut()
-				.addAndSwitchUser().authorization("automationEpamUser2@gmail.com", "user212345678").markMessageAsSpam()
-				.logOut().switchUser().authorization("automationEpamUser1@gmail.com", "user112345678")
-				.sendMessage("automationEpamUser2@gmail.com", "second msg").switchToDefaultWindow().logOut()
-				.switchUser().authorization("automationEpamUser2@gmail.com", "user212345678").goToSpamPage()
-				.checkSenderName("Anatoly Anatolyev"));
-	}
-
-	@AfterClass
-	public void afterClass() {
-		driver.close();
+		
+		Assert.assertTrue(loginPage
+				.goToLoginPage()
+				.authorization(user1.getLogin(), user1.getPassword())
+				.sendMessage(user2.getLogin(), User.getMessage())
+				.switchToDefaultWindow()
+				.logOut()
+				.addAndSwitchUser()
+				.authorization(user2.getLogin(), user2.getPassword())
+				.markMessageAsSpam()
+				.logOut()
+				.switchUser()
+				.authorization(user1.getLogin(), user1.getPassword())
+				.sendMessage(user2.getLogin(), "second msg")
+				.switchToDefaultWindow()
+				.logOut()
+				.switchUser()
+				.authorization(user2.getLogin(), user2.getPassword())
+				.goToSpamPage()
+				.checkSenderName(User.getNameForCheck()));
 	}
 
 }
