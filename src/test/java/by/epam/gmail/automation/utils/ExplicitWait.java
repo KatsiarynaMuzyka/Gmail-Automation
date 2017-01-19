@@ -16,12 +16,6 @@ public class ExplicitWait {
 				.withMessage("Element was not found by locator ");
 	}
 
-	public ExplicitWait(WebDriver driver, int time) {
-		this.driverWait = driver;
-		wait = new WebDriverWait(driver, time).ignoring(StaleElementReferenceException.class, WebDriverException.class)
-				.withMessage("Element was not found by locator ");
-	}
-
 	public void waitForElementIsClickable(WebElement element) {
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
