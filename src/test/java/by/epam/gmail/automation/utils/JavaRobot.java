@@ -78,12 +78,12 @@ public class JavaRobot {
 		}
 	}
 	
-	public static void createFileOver25MB(String filepath, String filename) {
+	public static void createFileOver25MB(String filepath, String filename, int size) {
 		runCMD(filepath);
 		enterCommandOrFileName("powershell");
 		enterCommandOrFileName(
 				"$file = New-Object -TypeName System.IO.FileStream -ArgumentList " + filename + ",Create,ReadWrite");
-		enterCommandOrFileName("$file.SetLength(30Mb)");
+		enterCommandOrFileName("$file.SetLength(" + size + "Mb)");
 		enterCommandOrFileName("$file.Close()");
 		enterCommandOrFileName("exit"); // exit powershell
 		enterCommandOrFileName("exit"); // exit cmd

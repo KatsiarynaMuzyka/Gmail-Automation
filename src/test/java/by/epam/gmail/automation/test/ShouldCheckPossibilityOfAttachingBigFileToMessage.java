@@ -22,10 +22,10 @@ public class ShouldCheckPossibilityOfAttachingBigFileToMessage extends BaseTest 
 		user2.setLogin(PropertyProvider.getProperty("user2"));
 		user2.setPassword(PropertyProvider.getProperty("password2"));
 		
-		JavaRobot.createFileOver25MB(filepath, filename);
+		JavaRobot.createFileOver25MB(filepath, filename, 30);
 	}
 	
-	@Test
+	@Test()
 	public void checkPossibilityOfAttachingFileOver25MBToMessage() {
 		Assert.assertTrue(loginPage
 				.goToLoginPage()
